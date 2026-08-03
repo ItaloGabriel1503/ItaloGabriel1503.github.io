@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ítalo Cavalcanti — Desenvolvedor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D1117;
+    --surface:#151B24;
+    --surface-2:#1B2330;
+    --line:#262F3D;
+    --text:#E8E6DE;
+    --text-dim:#8B93A3;
+    --text-faint:#5B6373;
+    --gold:#C9A24B;
+    --teal:#4FB8A8;
+    --serif:'Fraunces', serif;
+    --mono:'JetBrains Mono', monospace;
+    --sans:'Inter', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--gold); color:#0D1117;}
+
+  a{color:inherit; text-decoration:none;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+
+  .wrap{max-width:920px; margin:0 auto; padding:0 28px;}
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(13,17,23,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:64px;}
+  .nav-mark{font-family:var(--mono); font-size:0.85rem; color:var(--gold); letter-spacing:0.02em;}
+  .nav-links{display:flex; gap:28px; font-family:var(--mono); font-size:0.8rem; color:var(--text-dim);}
+  .nav-links a{transition:color .2s;}
+  .nav-links a:hover{color:var(--text);}
+  @media (max-width:560px){ .nav-links{gap:16px; font-size:0.72rem;} }
+
+  /* HERO */
+  header.hero{padding:120px 0 90px; position:relative; overflow:hidden;}
+  .eyebrow{
+    font-family:var(--mono); font-size:0.8rem; color:var(--teal);
+    letter-spacing:0.08em; text-transform:uppercase; margin-bottom:22px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:7px; height:7px; border-radius:50%; background:var(--teal); box-shadow:0 0 10px var(--teal);}
+  h1.name{
+    font-family:var(--serif); font-weight:500; font-style:italic;
+    font-size:clamp(2.6rem, 7vw, 4.6rem);
+    line-height:1.05; letter-spacing:-0.01em;
+    color:var(--text); max-width:11ch;
+  }
+  .hero-sub{
+    margin-top:26px; max-width:52ch; font-size:1.08rem; color:var(--text-dim); font-weight:400;
+  }
+  .hero-sub strong{color:var(--text); font-weight:600;}
+  .hero-cta{display:flex; gap:14px; margin-top:38px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:0.82rem; padding:12px 22px; border-radius:3px;
+    border:1px solid var(--line); transition:all .2s;
+  }
+  .btn-primary{background:var(--gold); color:#14100A; border-color:var(--gold); font-weight:500;}
+  .btn-primary:hover{background:#dbb45f;}
+  .btn-ghost{color:var(--text-dim); border-color:var(--line);}
+  .btn-ghost:hover{color:var(--text); border-color:var(--text-faint);}
+
+  /* SECTION LABELS */
+  .section{padding:88px 0; border-top:1px solid var(--line);}
+  .section-head{display:flex; align-items:baseline; gap:16px; margin-bottom:44px;}
+  .section-num{font-family:var(--mono); font-size:0.78rem; color:var(--text-faint);}
+  .section-title{font-family:var(--serif); font-style:italic; font-weight:500; font-size:1.9rem; color:var(--text);}
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:56px;}
+  @media (max-width:700px){ .about-grid{grid-template-columns:1fr;} }
+  .about-text p{color:var(--text-dim); margin-bottom:18px; font-size:1rem;}
+  .about-text p strong{color:var(--text); font-weight:500;}
+  .stack{display:flex; flex-wrap:wrap; gap:10px; margin-top:8px;}
+  .chip{
+    font-family:var(--mono); font-size:0.76rem; color:var(--teal);
+    border:1px solid #244742; background:rgba(79,184,168,0.06);
+    padding:6px 12px; border-radius:20px;
+  }
+  .about-meta{font-family:var(--mono); font-size:0.82rem; color:var(--text-faint); line-height:2;}
+  .about-meta span{color:var(--text-dim);}
+
+  /* PROJECTS */
+  .projects{display:flex; flex-direction:column; gap:2px;}
+  .project{
+    background:var(--surface); border:1px solid var(--line); border-radius:6px;
+    padding:30px 32px; transition:border-color .2s, transform .2s;
+    margin-bottom:16px;
+  }
+  .project:hover{border-color:var(--gold); transform:translateX(4px);}
+  .project-top{display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap;}
+  .project-path{font-family:var(--mono); font-size:0.78rem; color:var(--text-faint); margin-bottom:6px;}
+  .project-path span{color:var(--gold);}
+  .project-name{font-family:var(--serif); font-size:1.35rem; font-weight:500; color:var(--text);}
+  .project-link{font-family:var(--mono); font-size:0.78rem; color:var(--teal); white-space:nowrap;}
+  .project-desc{color:var(--text-dim); margin-top:12px; max-width:60ch; font-size:0.96rem;}
+  .project-tags{display:flex; gap:8px; margin-top:18px; flex-wrap:wrap;}
+  .tag{font-family:var(--mono); font-size:0.72rem; color:var(--text-faint); border:1px solid var(--line); padding:3px 9px; border-radius:3px;}
+
+  /* JOURNEY / COMMIT LOG */
+  .log{position:relative; padding-left:28px;}
+  .log::before{content:''; position:absolute; left:6px; top:6px; bottom:6px; width:1px; background:var(--line);}
+  .commit{position:relative; padding-bottom:34px;}
+  .commit:last-child{padding-bottom:0;}
+  .commit::before{
+    content:''; position:absolute; left:-28px; top:5px; width:11px; height:11px;
+    border-radius:50%; background:var(--bg); border:2px solid var(--gold);
+  }
+  .commit-hash{font-family:var(--mono); font-size:0.76rem; color:var(--gold);}
+  .commit-msg{font-family:var(--serif); font-size:1.1rem; color:var(--text); margin:4px 0 4px;}
+  .commit-meta{font-family:var(--mono); font-size:0.74rem; color:var(--text-faint);}
+
+  /* CONTACT / FOOTER */
+  footer{padding:80px 0 60px; text-align:center;}
+  footer .section-title{font-size:2rem;}
+  footer p{color:var(--text-dim); max-width:44ch; margin:18px auto 34px;}
+  .footer-links{display:flex; justify-content:center; gap:26px; font-family:var(--mono); font-size:0.85rem; margin-top:8px;}
+  .footer-links a{color:var(--text-dim); border-bottom:1px solid transparent; padding-bottom:3px; transition:all .2s;}
+  .footer-links a:hover{color:var(--gold); border-color:var(--gold);}
+  .fine{margin-top:70px; font-family:var(--mono); font-size:0.72rem; color:var(--text-faint);}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="nav-mark">italo.dev</span>
+    <div class="nav-links">
+      <a href="#sobre">sobre</a>
+      <a href="#projetos">projetos</a>
+      <a href="#jornada">jornada</a>
+      <a href="#contato">contato</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">disponível para oportunidades</div>
+    <h1 class="name">Ítalo Gabriel<br>Cavalcanti Silva</h1>
+    <p class="hero-sub">
+      Desenvolvedor em formação, construindo interfaces com <strong>JavaScript</strong> e <strong>React</strong>.
+      Ainda no começo — e documentando cada passo do caminho.
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#projetos">ver projetos</a>
+      <a class="btn btn-ghost" href="#contato">falar comigo</a>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="sobre">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Sobre</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          <strong>Olá, eu sou o Ítalo.</strong> Estou no início da minha jornada como desenvolvedor,
+          focado em construir uma base sólida em JavaScript e no ecossistema React. Prefiro aprender
+          fazendo — cada projeto aqui é um degrau, não um produto final.
+        </p>
+        <p>
+          Gosto de interfaces bem pensadas e de entender o "porquê" por trás de cada decisão técnica,
+          não só o "como". Este site é, na prática, o meu primeiro projeto real: escrito, testado e
+          publicado por mim.
+        </p>
+        <div class="stack">
+          <span class="chip">JavaScript</span>
+          <span class="chip">React</span>
+          <span class="chip">HTML/CSS</span>
+          <span class="chip">Git</span>
+        </div>
+      </div>
+      <div class="about-meta">
+        <div>status <span>— estudante / em formação</span></div>
+        <div>foco <span>— front-end</span></div>
+        <div>base <span>— Natal, RN</span></div>
+        <div>modo <span>— aprendendo em público</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="projetos">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Projetos</h2>
+    </div>
+    <div class="projects">
+
+      <div class="project">
+        <div class="project-top">
+          <div>
+            <div class="project-path"><span>~/projetos/</span>nome-do-projeto</div>
+            <div class="project-name">Meu portfólio</div>
+          </div>
+          <a class="project-link" href="#">ver código →</a>
+        </div>
+        <p class="project-desc">
+          Esse foi meu primeiro projeto em "Vibe coding".
+          Meu portfólio.
+        </p>
+        <div class="project-tags">
+          <span class="tag">Html</span>
+          <span class="tag">CSS</span>
+          <span class="tag">TESTE</span>
+        </div>
+      </div>
+ 
+     <!-- <div class="project">
+        <div class="project-top">
+          <div>
+            <div class="project-path"><span>~/projetos/</span>segundo-projeto</div>
+            <div class="project-name">Nome do Projeto 2</div>
+          </div>
+          <a class="project-link" href="#">ver código →</a>
+        </div>
+        <p class="project-desc">
+          Espaço reservado para o seu segundo projeto. Pode ser um exercício de curso,
+          um clone de interface ou algo pessoal que você construiu para aprender.
+        </p>
+        <div class="project-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <div>
+            <div class="project-path"><span>~/projetos/</span>terceiro-projeto</div>
+            <div class="project-name">Nome do Projeto 3</div>
+          </div>
+          <a class="project-link" href="#">ver código →</a>
+        </div>
+        <p class="project-desc">
+          Um terceiro espaço para quando você tiver mais um projeto pronto.
+          Pode remover este bloco se ainda não tiver conteúdo suficiente.
+        </p>
+        <div class="project-tags">
+          <span class="tag">React</span>
+          <span class="tag">API</span>
+        </div>
+      </div>-->
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="jornada">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Jornada</h2>
+    </div>
+    <div class="log">
+      <div class="commit">
+        <div class="commit-hash">#0003</div>
+        <div class="commit-msg">Publiquei este portfólio</div>
+        <div class="commit-meta">2026 — primeiro projeto real, primeiros códigos.</div>
+      </div>
+      <div class="commit">
+        <div class="commit-hash">#0002</div>
+        <div class="commit-msg">Comecei a estudar React</div>
+        <div class="commit-meta">componentes, estado, props — a base de tudo</div>
+      </div>
+      <div class="commit">
+        <div class="commit-hash">#0001</div>
+        <div class="commit-msg">Escrevi minhas primeiras linhas de JavaScript</div>
+        <div class="commit-meta">o início da jornada</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contato">
+  <div class="wrap">
+    <h2 class="section-title">Vamos conversar</h2>
+    <p>Estou em busca de estágio ou primeiras oportunidades como desenvolvedor. Se você tem um projeto, uma vaga ou só quer trocar uma ideia — me chama.</p>
+    <div class="footer-links">
+      <a href="mailto:seuemail@exemplo.com">email</a>
+      <a href="#">linkedin</a>
+      <a href="#">github</a>
+    </div>
+    <div class="fine">Ítalo Gabriel Cavalcanti Silva — construído linha por linha</div>
+  </div>
+</footer>
+
+</body>
+</html>
